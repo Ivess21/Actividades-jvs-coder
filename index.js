@@ -1,38 +1,34 @@
-/**
+const letras = "abcdefghijklmnopqrstuvwxyz";
+const mayusculas = letras.toUpperCase();
+const numeros = "0123456789";
+const simbolos = "!@#$%^&*()_+[]{}|;:',.<>?";
 
- */
+function generarContraseña(longitud, incluirLetras, incluirMayusculas, incluirNumeros, incluirSimbolos) {
+    let todosLosCaracteres = "";
+    if (incluirLetras) todosLosCaracteres += letras;
+    if (incluirMayusculas) todosLosCaracteres += mayusculas;
+    if (incluirNumeros) todosLosCaracteres += numeros;
+    if (incluirSimbolos) todosLosCaracteres += simbolos;
 
-function calcularCostoFinal() {
-    const precioProducto = parseFloat(document.getElementById('precioProducto').value);
-    const cantidadProductos = parseInt(document.getElementById('cantidadProductos').value);
-    const descuento = parseFloat(document.getElementById('descuento').value);
-    const impuesto = parseFloat(document.getElementById('impuesto').value);
-    const pesoTotal = parseFloat(document.getElementById('pesoTotal').value);
+    if (!todosLosCaracteres.length) return "Selecciona al menos un tipo de carácter.";
 
-    const costoProductos = calcularCostoTotal(precioProducto, cantidadProductos);
-    const costoConDescuento = aplicarDescuento(costoProductos, descuento);
-    const costoConImpuesto = aplicarImpuesto(costoConDescuento, impuesto);
-    const costoEnvio = calcularCostoEnvio(pesoTotal);
-
-    const costoFinal = costoConImpuesto + costoEnvio;
-
-    document.getElementById('resultado').innerText = 
-        `Costo Final: $${costoFinal.toFixed(2)} (Costo de Envío: $${costoEnvio.toFixed(2)})`;
+    let contraseña = "";
+    for (let i = 0; i < longitud; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * todosLosCaracteres.length);
+        contraseña += todosLosCaracteres[indiceAleatorio];
+    }
+    
+    return contraseña;
 }
 
-function calcularCostoTotal(precio, cantidad) {
-    return precio * cantidad;
-}
+document.getElementById('passwordForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const longitud = parseInt(document.getElementById('length').value);
+    const incluirLetras = document.getElementById('includeLowercase').checked;
+    const incluirMayusculas = document.getElementById('includeUppercase').checked;
+    const incluirNumeros = document.getElementById('includeNumbers').checked;
+    const incluirSimbolos = document.getElementById('includeSymbols').checked;
 
-function aplicarDescuento(costo, descuento) {
-    return costo - (costo * (descuento / 100));
-}
-
-function aplicarImpuesto(costo, impuesto) {
-    return costo + (costo * (impuesto / 100));
-}
-
-function calcularCostoEnvio(peso) {
-    const tarifaPorKg = 10; // Tarifa de envío por kilogramo
-    return peso * tarifaPorKg;
-}
+    const contraseñaGenerada = generarContraseña(longitud, incluirLetras, incluirMayusculas, incluirNumeros, incluirSimbolos);
+    document.getElementById('result').textContent = `Contraseña generada: ${contraseñaGenerada}`;
+});señas();

@@ -3,39 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pre-entrega1-js</title>
+    <title>Segunda entrega js</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <header>
-
+        
     </header>
     <main>
-        <h1>Simulador de Costo Total</h1>
-    
-        <label for="precioProducto">Precio del Producto:</label>
-        <input type="number" id="precioProducto"><br>
-    
-        <label for="cantidadProductos">Cantidad de Productos:</label>
-        <input type="number" id="cantidadProductos"><br>
-    
-        <label for="descuento">Descuento (%):</label>
-        <input type="number" id="descuento"><br>
-    
-        <label for="impuesto">Impuesto (%):</label>
-        <input type="number" id="impuesto"><br>
-    
-        <label for="pesoTotal">Peso Total (kg):</label>
-        <input type="number" id="pesoTotal"><br>
-    
-        <button onclick="calcularCostoFinal()">Calcular Costo Final</button>
-    
-        <p id="resultado"></p>
-        </main>
+        <div class="container">
+            <h1>Generador de Contraseñas</h1>
+            <form id="passwordForm">
+                <label for="length">Longitud de la contraseña:</label>
+                <input type="number" id="length" name="length" min="1" required>
+                <div class="controls">
+                    <label><input type="checkbox" id="includeLowercase" checked> Incluir letras minúsculas</label><br>
+                    <label><input type="checkbox" id="includeUppercase" checked> Incluir letras mayúsculas</label><br>
+                    <label><input type="checkbox" id="includeNumbers" checked> Incluir números</label><br>
+                    <label><input type="checkbox" id="includeSymbols" checked> Incluir símbolos</label><br>
+                </div>
+                <button type="submit">Generar Contraseña</button>
+            </form>
+            <div class="result" id="result"></div>
+        </div>
+    </main>
     <footer>
 
     </footer>
-    <script src="./index.js">
-        
-    </script>
+    <script src="./index.js"></script>
 </body>
 </html>
