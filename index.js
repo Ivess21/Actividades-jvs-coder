@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const numeros = "0123456789";
     const simbolos = "!@#$%^&*()_+[]{}|;:',.<>?";
 
+
     const savedSettings = JSON.parse(localStorage.getItem('passwordSettings')) || {};
     if (savedSettings.length) document.getElementById('length').value = savedSettings.length;
     if (savedSettings.includeLowercase) document.getElementById('includeLowercase').checked = savedSettings.includeLowercase;
@@ -43,6 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const contraseñaGenerada = generarContraseña(longitud, incluirLetras, incluirMayusculas, incluirNumeros, incluirSimbolos);
         document.getElementById('result').textContent = `Contraseña generada: ${contraseñaGenerada}`;
 
+        if (contraseñaGenerada !== "Selecciona al menos un tipo de carácter.") {
+            document.getElementById('copyButton').style.display = 'block';
+        } else {
+            document.getElementById('copyButton').style.display = 'none';
+        }
 
         const settings = {
             length: longitud,
@@ -52,5 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
             includeSymbols: incluirSimbolos
         };
         localStorage.setItem('passwordSettings', JSON.stringify(settings));
+    });
+
+    document.getElementById('copyButton').addEventListener('click', function() {
+        const contraseña = document.getElementById('result').textContent.replace('Contraseña generada: ', '');
+        navigator.clipboard.writeText(contraseña).then(() => {
+            alert('Contraseña copiada al portapapeles.');
+        }).catch(err => {
+            alert('Hubo un error al copiar la contraseña: ' + err);
+        });
     });
 });

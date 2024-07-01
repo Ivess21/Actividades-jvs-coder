@@ -21,3 +21,7 @@ body {
 .controls {
     margin-top: 20px;
 }
+#copyButton {
+    margin-top: 10px;
+    display: none;
+}
